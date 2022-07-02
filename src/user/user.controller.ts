@@ -9,4 +9,11 @@ export class UserController {
   doLogin(@Body('email') email: string, @Body('password') password: string) {
     return { id: this.userService.doLogin() };
   }
+  @Post('signup')
+  async doSignup(
+    @Body() body: { email: string; fullName: string; password: string },
+  ): Promise<any> {
+    const res = await this.userService.doSignup(body);
+    return res;
+  }
 }

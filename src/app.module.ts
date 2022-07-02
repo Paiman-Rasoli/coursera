@@ -17,6 +17,7 @@ import { User } from './user/user.entity';
       username: 'postgres',
       password: 'Asdf123',
       database: 'coursera',
+      synchronize: true,
       entities: [User],
     }),
     UserModule,
