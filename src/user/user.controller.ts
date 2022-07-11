@@ -7,7 +7,8 @@ export class UserController {
 
   @Post('login')
   doLogin(@Body('email') email: string, @Body('password') password: string) {
-    return { id: this.userService.doLogin() };
+    const data = this.userService.doLogin();
+    return { id: data  };
   }
   @Post('signup')
   async doSignup(
