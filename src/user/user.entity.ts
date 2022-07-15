@@ -12,6 +12,9 @@ export class User {
   password: string;
 
   @Column()
+  hashedRt: String;
+
+  @Column()
   fullName: string;
 
   @Column()

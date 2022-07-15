@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,8 +20,10 @@ import { User } from './user/user.entity';
       database: 'coursera',
       synchronize: true,
       entities: [User],
+  
     }),
     UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
