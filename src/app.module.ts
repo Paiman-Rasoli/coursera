@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user/user.entity';
+import { User } from './auth/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards';
@@ -23,7 +22,6 @@ import { AtGuard } from './common/guards';
       synchronize: true,
       entities: [User],
     }),
-    UserModule,
     AuthModule,
   ],
   controllers: [],
