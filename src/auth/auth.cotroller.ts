@@ -23,11 +23,13 @@ export class AuthController {
   signupLocal(@Body() dto: AuthDto): Promise<Tokens> {
     return this.authService.signupLocal(dto);
   }
+
   @Public()
   @Post('/local/signin')
   signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
     return this.authService.signinLocal(dto);
   }
+
   @Post('/logout')
   @HttpCode(HttpStatus.OK)
   logout(@Req() req: Request) {
@@ -35,8 +37,10 @@ export class AuthController {
     this.authService.logout(user['sub']);
   }
 
-  @Post('/refresh')
+  @Public()
+  @UseGuards(RtGuard)
   @HttpCode(HttpStatus.OK)
+  @Post('/refresh')
   refreshToken(@Req() req: Request): Promise<Tokens> {
     const user = req?.user;
 

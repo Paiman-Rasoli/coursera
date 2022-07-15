@@ -49,7 +49,7 @@ export class AuthService {
     const find = await this.userRepositroy.findOneBy({
       id: id,
     });
-    if (!find) throw new ForbiddenException('Access Denied!');
+    if (!find || !find.hashedRt) throw new ForbiddenException('Access Denied!');
     const compareHash = await compare(at, String(find.hashedRt));
     if (!compareHash) throw new ForbiddenException('Access Denied!');
     // return new tokens
