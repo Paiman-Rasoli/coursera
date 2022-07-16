@@ -11,7 +11,7 @@ import { Request } from 'express';
 import { Public } from 'src/common/decorators';
 import { AtGuard, RtGuard } from 'src/common/guards';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
+import { AuthDto, RegisterDto } from './dto';
 import { Tokens } from './types';
 
 @Controller('auth')
@@ -20,7 +20,7 @@ export class AuthController {
 
   @Public()
   @Post('/local/signup')
-  signupLocal(@Body() dto: AuthDto): Promise<Tokens> {
+  signupLocal(@Body() dto: RegisterDto): Promise<Tokens> {
     return this.authService.signupLocal(dto);
   }
 

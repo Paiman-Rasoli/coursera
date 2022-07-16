@@ -1,7 +1,13 @@
-import { Body, ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AuthDto } from './dto';
+import { AuthDto, RegisterDto } from './dto';
 import { hash, compare } from 'bcrypt';
 import { Tokens } from './types';
 import { JwtService } from '@nestjs/jwt';
@@ -15,13 +21,23 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signupLocal(@Body() dto: AuthDto): Promise<Tokens> {
+  async signupLocal(@Body() dto: RegisterDto): Promise<Tokens> {
     const hashPassword = await this.hashDataHelper(dto.password);
+    let user;
+    try {
+      user = await this.userRepositroy.save({
+        email: dto.email,
+        password: hashPassword,
+        fullName: dto.fullName,
+        createdAt: new Date().toISOString(),
+      });
+    } catch (err) {
+      if (err?.code === 'ER_DUP_ENTRY') {
+        throw new BadRequestException('Email already taken!');
+      }
+      throw new InternalServerErrorException('Server Error');
+    }
 
-    const user = await this.userRepositroy.save({
-      email: dto.email,
-      password: hashPassword,
-    });
     const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
     return tokens;
