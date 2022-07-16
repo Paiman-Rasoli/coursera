@@ -1,0 +1,12 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TaskModels {
+  name: String!
+  desc: String
+}
+
+type Query {
+  findAll: TaskModels!
+}
