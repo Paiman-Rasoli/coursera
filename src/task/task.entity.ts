@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 // generate graphql schema
 @ObjectType()
 @Entity()
-export class TaskModels {
+export class TaskEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,5 +18,5 @@ export class TaskModels {
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  desc: string;
+  desc?: string;
 }

@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TaskModels {
+type TaskEntity {
   id: Float!
   name: String!
   isDone: Boolean!
@@ -10,5 +10,15 @@ type TaskModels {
 }
 
 type Query {
-  findAll: TaskModels!
+  getAllTasks: [TaskEntity!]!
+}
+
+type Mutation {
+  createTask(taskInput: TaskInputDto!): TaskEntity
+}
+
+input TaskInputDto {
+  name: String!
+  isDone: Boolean!
+  desc: String
 }

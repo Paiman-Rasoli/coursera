@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './auth/user.entity';
 import { AuthModule } from './auth/auth.module';
-import { APP_GUARD } from '@nestjs/core';
-import { AtGuard } from './common/guards';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
@@ -24,7 +21,7 @@ import { TaskModule } from './task/task.module';
       password: '',
       database: 'coursera',
       synchronize: true,
-      entities: [User],
+      entities: ['dist/**/*.entity{.ts,.js}'],
     }),
     AuthModule, // REST API BASE
     TaskModule, // GraphQl base
@@ -35,12 +32,6 @@ import { TaskModule } from './task/task.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
   ],
-  controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: AtGuard,
-    },
-  ],
+  providers: [],
 })
 export class AppModule {}
