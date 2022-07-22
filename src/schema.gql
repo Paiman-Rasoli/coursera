@@ -3,7 +3,9 @@
 # ------------------------------------------------------
 
 type TaskModels {
+  id: Float!
   name: String!
+  isDone: Boolean!
   desc: String
 }
 
