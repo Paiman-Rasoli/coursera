@@ -26,7 +26,7 @@ export class AuthService {
     let user;
     try {
       user = await this.userRepositroy.save({
-        email: dto.email,
+        email: dto.email.toLowerCase(),
         password: hashPassword,
         fullName: dto.fullName,
         createdAt: new Date().toISOString(),
@@ -45,7 +45,7 @@ export class AuthService {
 
   async signinLocal(@Body() dto: AuthDto): Promise<Tokens> {
     const find = await this.userRepositroy.findOneBy({
-      email: dto.email,
+      email: dto.email.toLowerCase(),
     });
     if (!find) throw new ForbiddenException('Access Denied!');
     const comparePassword = await compare(dto.password, find.password);
