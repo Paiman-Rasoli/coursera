@@ -32,6 +32,10 @@ import { AtGuard } from './common/guards/at.guard';
       debug: false,
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context: ({ req, res }) => ({
+        req,
+        res,
+      }),
     }),
   ],
   providers: [
