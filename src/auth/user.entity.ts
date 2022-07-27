@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,7 +14,7 @@ export class User {
   password: string;
 
   @Column()
-  hashedRt: String;
+  hashedRt: string;
 
   @Column()
   fullName: string;

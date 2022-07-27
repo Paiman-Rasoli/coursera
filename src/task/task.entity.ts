@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 // generate graphql schema
 @ObjectType()
 @Entity()
-export class TaskEntity {
+export class Tasks {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;

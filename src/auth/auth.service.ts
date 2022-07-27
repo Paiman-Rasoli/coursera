@@ -11,13 +11,13 @@ import { AuthDto, RegisterDto } from './dto';
 import { hash, compare } from 'bcrypt';
 import { Tokens } from './types';
 import { JwtService } from '@nestjs/jwt';
-import { User } from './user.entity';
+import { Users } from './user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private userRepositroy: Repository<User>,
+    @InjectRepository(Users)
+    private userRepositroy: Repository<Users>,
     private jwtService: JwtService,
   ) {}
 
