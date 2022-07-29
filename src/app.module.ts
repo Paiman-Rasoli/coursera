@@ -36,6 +36,7 @@ import { ListModule } from './list/list.module';
       driver: ApolloDriver,
       debug: false,
       playground: true,
+      introspection: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req, res }) => ({
         req,

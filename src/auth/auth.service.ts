@@ -32,6 +32,7 @@ export class AuthService {
         createdAt: new Date().toISOString(),
       });
     } catch (err) {
+      console.error('ERR', err);
       if (err?.code === 'ER_DUP_ENTRY') {
         throw new BadRequestException('Email already taken!');
       }
