@@ -9,27 +9,27 @@ export class ListResolver {
   constructor(private readonly listService: ListService) {}
 
   @Mutation(() => List)
-  createList(@Args('createListInput') createListInput: CreateListInput) {
+  createList(@Args('createList') createListInput: CreateListInput) {
     return this.listService.create(createListInput);
   }
 
-  @Query(() => [List], { name: 'list' })
+  @Query(() => [List], { name: 'getAllLists' })
   findAll() {
     return this.listService.findAll();
   }
 
-  @Query(() => List, { name: 'list' })
+  @Query(() => List, { name: 'findOneList' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.listService.findOne(id);
   }
 
   @Mutation(() => List)
-  updateList(@Args('updateListInput') updateListInput: UpdateListInput) {
+  updateList(@Args('updateList') updateListInput: UpdateListInput) {
     return this.listService.update(updateListInput.id, updateListInput);
   }
 
   @Mutation(() => List)
-  removeList(@Args('id', { type: () => Int }) id: number) {
+  removeList(@Args('deleteList', { type: () => Int }) id: number) {
     return this.listService.remove(id);
   }
 }

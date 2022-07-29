@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateListInput } from './dto/create-list.input';
 import { UpdateListInput } from './dto/update-list.input';
+import { List } from './entities/list.entity';
 
 @Injectable()
 export class ListService {
-  create(createListInput: CreateListInput) {
-    return 'This action adds a new list';
+  constructor(
+    @InjectRepository(List) private listRepository: Repository<List>,
+  ) {}
+
+  create(list: CreateListInput) {
+    const taskList = this.listRepository.create({
+      name: list.name,
+      description: list.description,
+      createdAt: new Date().toISOString(),
+    });
+    return this.listRepository.save(taskList);
   }
 
   findAll() {
-    return `This action returns all list`;
+    return this.listRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} list`;
+    return this.listRepository.findOneBy({ id: id });
   }
 
   update(id: number, updateListInput: UpdateListInput) {

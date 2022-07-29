@@ -18,16 +18,17 @@ type List {
 
 type Query {
   getAllTasks: [Task!]!
-  list(id: Int!): List!
+  getAllLists: [List!]!
+  findOneList(id: Int!): List!
 }
 
 type Mutation {
   createTask(taskInput: TaskInputDto!): Task
   updateTask(taskUpdateInput: TaskUpdateInputDto!): Task
   deleteTask(id: TaskIdDto!): Task
-  createList(createListInput: CreateListInput!): List!
-  updateList(updateListInput: UpdateListInput!): List!
-  removeList(id: Int!): List!
+  createList(createList: CreateListInput!): List!
+  updateList(updateList: UpdateListInput!): List!
+  removeList(deleteList: Int!): List!
 }
 
 input TaskInputDto {
@@ -48,12 +49,12 @@ input TaskIdDto {
 }
 
 input CreateListInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  description: String!
 }
 
 input UpdateListInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  id: Float!
+  name: String!
+  description: String!
 }
