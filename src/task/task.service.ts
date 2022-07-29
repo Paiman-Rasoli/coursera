@@ -27,10 +27,10 @@ export class TaskService {
     });
   }
 
-  async update(task: TaskUpdateInputDto): Promise<Task> {
-    const result = this.taskRepository.findOneBy({ id: task.id });
-    this.taskRepository.update({ id: task.id }, task);
-    return result;
+  async update(id: number, task: TaskUpdateInputDto): Promise<Task> {
+    const taskCopy: Task = this.taskRepository.create(task);
+    taskCopy.id = id;
+    return this.taskRepository.save(taskCopy);
   }
 
   async deleteTask(meta: TaskIdDto): Promise<Task> {

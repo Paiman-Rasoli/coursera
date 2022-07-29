@@ -16,20 +16,20 @@ import { List } from '../list/entities/list.entity';
 export class TaskResolver {
   constructor(private taskService: TaskService) {}
 
+  @Mutation(() => Task, { name: 'createTask' })
+  async create(@Args('taskInput') task: TaskInputDto): Promise<Task> {
+    return this.taskService.create(task);
+  }
   @Query(() => [Task], { name: 'getAllTasks' })
   findAll() {
     return this.taskService.findAll();
   }
 
-  @Mutation(() => Task, { name: 'createTask', nullable: true })
-  async create(@Args('taskInput') task: TaskInputDto): Promise<Task> {
-    return this.taskService.create(task);
-  }
-  @Mutation(() => Task, { name: 'updateTask', nullable: true })
+  @Mutation(() => Task, { name: 'updateTask' })
   async update(
     @Args('taskUpdateInput') task: TaskUpdateInputDto,
   ): Promise<Task> {
-    return this.taskService.update(task);
+    return this.taskService.update(task.id, task);
   }
 
   @Mutation(() => Task, { name: 'deleteTask', nullable: true })

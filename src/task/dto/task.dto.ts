@@ -5,6 +5,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsOptional,
+  IsString,
 } from 'class-validator';
 
 @InputType()
@@ -40,12 +41,12 @@ export class TaskUpdateInputDto {
   @IsNotEmpty({ message: 'Id is required!' })
   id: number;
   // generate graphql schema
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   name?: string;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   isDone?: boolean;
 
   @Field({ nullable: true })
