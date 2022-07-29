@@ -2,14 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type List {
-  id: Int!
-  name: String!
-  description: String!
-  createdAt: String!
-  tasks: [Task!]
-}
-
 type Task {
   id: Float!
   name: String!
@@ -17,6 +9,26 @@ type Task {
   desc: String
   list: List!
   listId: Float!
+}
+
+type List {
+  id: Int!
+  name: String!
+  description: String!
+  createdAt: String!
+  tasks: [Task!]
+  user: User!
+  userId: Float!
+}
+
+type User {
+  id: Float!
+  email: String!
+  password: String!
+  hashedRt: String
+  fullName: String!
+  createdAt: String!
+  lists: [List!]
 }
 
 type Query {

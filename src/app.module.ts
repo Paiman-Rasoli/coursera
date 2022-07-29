@@ -17,7 +17,7 @@ import { ListModule } from './list/list.module';
     }),
     TypeOrmModule.forRoot({
       url: process.env.DATABASE_URL,
-      type: 'postgres',
+      type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
@@ -25,9 +25,7 @@ import { ListModule } from './list/list.module';
       database: 'coursera',
       synchronize: true,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: false,
     }),
     AuthModule, // REST API BASE
     TaskModule, // GraphQl base
@@ -36,7 +34,6 @@ import { ListModule } from './list/list.module';
       driver: ApolloDriver,
       debug: false,
       playground: true,
-      introspection: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req, res }) => ({
         req,

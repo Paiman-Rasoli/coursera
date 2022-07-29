@@ -3,14 +3,19 @@ import { ListService } from './list.service';
 import { List } from './entities/list.entity';
 import { CreateListInput } from './dto/create-list.input';
 import { UpdateListInput } from './dto/update-list.input';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
 
 @Resolver(() => List)
 export class ListResolver {
   constructor(private readonly listService: ListService) {}
 
   @Mutation(() => List)
-  createList(@Args('createList') createListInput: CreateListInput) {
-    return this.listService.create(createListInput);
+  createList(
+    @Args('createList') createListInput: CreateListInput,
+    @CurrentUser() user,
+  ) {
+    console.log('Request', user);
+    return this.listService.create(createListInput, user.sub);
   }
 
   @Query(() => [List], { name: 'getAllLists' })

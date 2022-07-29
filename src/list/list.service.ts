@@ -11,11 +11,12 @@ export class ListService {
     @InjectRepository(List) private listRepository: Repository<List>,
   ) {}
 
-  create(list: CreateListInput) {
+  create(list: CreateListInput, uid) {
     const taskList = this.listRepository.create({
       name: list.name,
       description: list.description,
       createdAt: new Date().toISOString(),
+      userId: uid,
     });
     return this.listRepository.save(taskList);
   }
