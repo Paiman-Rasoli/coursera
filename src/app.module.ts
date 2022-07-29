@@ -16,6 +16,7 @@ import { ListModule } from './list/list.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
+      url: process.env.DATABASE_URL,
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -23,7 +24,7 @@ import { ListModule } from './list/list.module';
       username: 'root',
       password: '',
       database: 'coursera',
-      synchronize: true,
+      synchronize: process.env.NODE_ENV === 'development',
       entities: ['dist/**/*.entity{.ts,.js}'],
     }),
     AuthModule, // REST API BASE

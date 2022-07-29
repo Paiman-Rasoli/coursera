@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TaskInputDto } from './dto';
 import { Task } from './entities/task.entity';
-import { TaskIdDto, TaskUpdateInputDto } from './dto/task.dto';
+import { TaskUpdateInputDto } from './dto/task.dto';
 import { ListService } from '../list/list.service';
 import { List } from '../list/entities/list.entity';
 
@@ -33,9 +33,9 @@ export class TaskService {
     return this.taskRepository.save(taskCopy);
   }
 
-  async deleteTask(meta: TaskIdDto): Promise<Task> {
-    const result = await this.taskRepository.findOneBy({ id: meta.id });
-    const delte = await this.taskRepository.delete({ id: meta.id });
+  async deleteTask(id: number): Promise<Task> {
+    const result = await this.taskRepository.findOneBy({ id: id });
+    await this.taskRepository.delete({ id: id });
     return result;
   }
 

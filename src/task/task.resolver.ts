@@ -1,12 +1,13 @@
 import {
   Args,
+  Int,
   Mutation,
   Parent,
   Query,
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { TaskInputDto, TaskIdDto } from './dto';
+import { TaskInputDto } from './dto';
 import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
 import { TaskUpdateInputDto } from './dto/task.dto';
@@ -33,8 +34,8 @@ export class TaskResolver {
   }
 
   @Mutation(() => Task, { name: 'deleteTask', nullable: true })
-  async deleteTask(@Args('id') meta: TaskIdDto): Promise<Task> {
-    return this.taskService.deleteTask(meta);
+  async deleteTask(@Args('id', { type: () => Int }) id: number): Promise<Task> {
+    return this.taskService.deleteTask(id);
   }
   @ResolveField(() => List)
   list(@Parent() task: Task) {

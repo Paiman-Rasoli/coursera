@@ -29,13 +29,6 @@ export class TaskInputDto {
 }
 
 @InputType()
-export class TaskIdDto {
-  @Field()
-  @IsNotEmpty({ message: 'Id is required!' })
-  id: number;
-}
-
-@InputType()
 export class TaskUpdateInputDto {
   @Field()
   @IsNotEmpty({ message: 'Id is required!' })
