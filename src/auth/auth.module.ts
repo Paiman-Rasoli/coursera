@@ -10,5 +10,6 @@ import { User } from './entities/user.entity';
   controllers: [AuthController],
   providers: [AuthService, ATStrategy, RTStrategy],
   imports: [TypeOrmModule.forFeature([User]), JwtModule.register({})],
+  exports: [AuthService],
 })
 export class AuthModule {}

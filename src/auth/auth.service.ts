@@ -120,4 +120,9 @@ export class AuthService {
       refresh_token: rt,
     };
   }
+  async findOneById(id: number) {
+    return this.userRepositroy.findOneBy({
+      id: id,
+    });
+  }
 }

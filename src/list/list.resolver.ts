@@ -1,9 +1,18 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { ListService } from './list.service';
 import { List } from './entities/list.entity';
 import { CreateListInput } from './dto/create-list.input';
 import { UpdateListInput } from './dto/update-list.input';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { User } from '../auth/entities/user.entity';
 
 @Resolver(() => List)
 export class ListResolver {
@@ -35,5 +44,10 @@ export class ListResolver {
   @Mutation(() => List, { name: 'deleteList' })
   removeList(@Args('id', { type: () => Int }) id: number) {
     return this.listService.remove(id);
+  }
+
+  @ResolveField(() => User)
+  user(@Parent() list: List) {
+    return this.listService.getUser(list.userId);
   }
 }

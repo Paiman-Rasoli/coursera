@@ -4,11 +4,14 @@ import { Repository } from 'typeorm';
 import { CreateListInput } from './dto/create-list.input';
 import { UpdateListInput } from './dto/update-list.input';
 import { List } from './entities/list.entity';
+import { AuthService } from '../auth/auth.service';
+import { User } from 'src/auth/entities/user.entity';
 
 @Injectable()
 export class ListService {
   constructor(
     @InjectRepository(List) private listRepository: Repository<List>,
+    private authService: AuthService,
   ) {}
 
   create(list: CreateListInput, uid) {
@@ -41,6 +44,11 @@ export class ListService {
   remove(id: number) {
     const find = this.findOne(id);
     this.listRepository.delete(id);
+    return find;
+  }
+  getUser(id: number): Promise<User> {
+    const find = this.authService.findOneById(id);
+    console.log('dd', find);
     return find;
   }
 }
