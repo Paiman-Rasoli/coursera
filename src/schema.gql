@@ -2,21 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Tasks {
+type Task {
   id: Float!
   name: String!
   isDone: Boolean!
   desc: String
 }
 
+type List {
+  id: Int!
+  name: String!
+  description: String!
+  createdAt: String!
+}
+
 type Query {
-  getAllTasks: [Tasks!]!
+  getAllTasks: [Task!]!
+  list(id: Int!): List!
 }
 
 type Mutation {
-  createTask(taskInput: TaskInputDto!): Tasks
-  updateTask(taskUpdateInput: TaskUpdateInputDto!): Tasks
-  deleteTask(id: TaskIdDto!): Tasks
+  createTask(taskInput: TaskInputDto!): Task
+  updateTask(taskUpdateInput: TaskUpdateInputDto!): Task
+  deleteTask(id: TaskIdDto!): Task
+  createList(createListInput: CreateListInput!): List!
+  updateList(updateListInput: UpdateListInput!): List!
+  removeList(id: Int!): List!
 }
 
 input TaskInputDto {
@@ -34,4 +45,15 @@ input TaskUpdateInputDto {
 
 input TaskIdDto {
   id: Float!
+}
+
+input CreateListInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateListInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

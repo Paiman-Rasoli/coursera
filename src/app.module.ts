@@ -8,6 +8,7 @@ import { join } from 'path';
 import { TaskModule } from './task/task.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards/at.guard';
+import { ListModule } from './list/list.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AtGuard } from './common/guards/at.guard';
     }),
     AuthModule, // REST API BASE
     TaskModule, // GraphQl base
+    ListModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: false,

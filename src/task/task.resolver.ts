@@ -1,31 +1,31 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TaskInputDto, TaskIdDto } from './dto';
-import { Tasks } from './task.entity';
+import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
 import { TaskUpdateInputDto } from './dto/task.dto';
 
-@Resolver(() => Tasks)
+@Resolver(() => Task)
 export class TaskResolver {
   constructor(private taskService: TaskService) {}
 
-  @Query(() => [Tasks], { name: 'getAllTasks' })
+  @Query(() => [Task], { name: 'getAllTasks' })
   findAll() {
     return this.taskService.findAll();
   }
 
-  @Mutation(() => Tasks, { name: 'createTask', nullable: true })
-  async create(@Args('taskInput') task: TaskInputDto): Promise<Tasks> {
+  @Mutation(() => Task, { name: 'createTask', nullable: true })
+  async create(@Args('taskInput') task: TaskInputDto): Promise<Task> {
     return this.taskService.create(task);
   }
-  @Mutation(() => Tasks, { name: 'updateTask', nullable: true })
+  @Mutation(() => Task, { name: 'updateTask', nullable: true })
   async update(
     @Args('taskUpdateInput') task: TaskUpdateInputDto,
-  ): Promise<Tasks> {
+  ): Promise<Task> {
     return this.taskService.update(task);
   }
 
-  @Mutation(() => Tasks, { name: 'deleteTask', nullable: true })
-  async deleteTask(@Args('id') meta: TaskIdDto): Promise<Tasks> {
+  @Mutation(() => Task, { name: 'deleteTask', nullable: true })
+  async deleteTask(@Args('id') meta: TaskIdDto): Promise<Task> {
     return this.taskService.deleteTask(meta);
   }
 }
