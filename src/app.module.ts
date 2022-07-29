@@ -17,7 +17,7 @@ import { ListModule } from './list/list.module';
     }),
     TypeOrmModule.forRoot({
       url: process.env.DATABASE_URL,
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
       port: 3306,
       ssl: false,
