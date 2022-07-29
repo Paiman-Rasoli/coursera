@@ -14,7 +14,7 @@ export class List {
   name: string;
 
   @Field()
-  @Column()
+  @Column({ default: 'N/A' })
   description: string;
 
   @Field()
