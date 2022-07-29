@@ -15,3 +15,29 @@ export class TaskInputDto {
   @IsOptional()
   desc?: string;
 }
+
+@InputType()
+export class TaskIdDto {
+  @Field()
+  @IsNotEmpty({ message: 'Id is required!' })
+  id: number;
+}
+
+@InputType()
+export class TaskUpdateInputDto {
+  @Field()
+  @IsNotEmpty({ message: 'Id is required!' })
+  id: number;
+  // generate graphql schema
+  @Field()
+  @IsOptional()
+  name?: string;
+
+  @IsOptional()
+  @Field()
+  isDone?: boolean;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  desc?: string;
+}
