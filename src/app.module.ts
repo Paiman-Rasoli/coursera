@@ -23,7 +23,7 @@ import { ListModule } from './list/list.module';
       username: 'root',
       password: '',
       database: 'coursera',
-      synchronize: true,
+      synchronize: process.env.NODE_ENV === 'development',
       entities: ['dist/**/*.entity{.ts,.js}'],
       ssl: {
         rejectUnauthorized: false,
