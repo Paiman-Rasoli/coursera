@@ -20,12 +20,14 @@ import { ListModule } from './list/list.module';
       type: 'postgres',
       host: 'localhost',
       port: 3306,
-      ssl: false,
       username: 'root',
       password: '',
       database: 'coursera',
       synchronize: process.env.NODE_ENV === 'development',
       entities: ['dist/**/*.entity{.ts,.js}'],
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     AuthModule, // REST API BASE
     TaskModule, // GraphQl base
