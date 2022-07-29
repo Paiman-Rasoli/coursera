@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Task } from '../../task/entities/task.entity';
 
 @ObjectType()
 @Entity()
@@ -19,4 +20,8 @@ export class List {
   @Field()
   @Column()
   createdAt: string;
+
+  @OneToMany(() => Task, (task) => task.list)
+  @Field(() => Task)
+  tasks: Task;
 }

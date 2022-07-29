@@ -2,18 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Task {
-  id: Float!
-  name: String!
-  isDone: Boolean!
-  desc: String
-}
-
 type List {
   id: Int!
   name: String!
   description: String!
   createdAt: String!
+  tasks: Task!
+}
+
+type Task {
+  id: Float!
+  name: String!
+  isDone: Boolean!
+  desc: String
+  list: List!
+  listId: Float!
 }
 
 type Query {
