@@ -22,6 +22,6 @@ export class List {
   createdAt: string;
 
   @OneToMany(() => Task, (task) => task.list)
-  @Field(() => Task)
-  tasks: Task;
+  @Field(() => [Task], { nullable: true })
+  tasks: Task[];
 }

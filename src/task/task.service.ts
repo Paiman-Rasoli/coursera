@@ -4,12 +4,15 @@ import { Repository } from 'typeorm';
 import { TaskInputDto } from './dto';
 import { Task } from './entities/task.entity';
 import { TaskIdDto, TaskUpdateInputDto } from './dto/task.dto';
+import { ListService } from '../list/list.service';
+import { List } from '../list/entities/list.entity';
 
 @Injectable()
 export class TaskService {
   constructor(
     @InjectRepository(Task)
     private taskRepository: Repository<Task>,
+    private ListService: ListService,
   ) {}
   findAll(): Promise<Task[]> {
     return this.taskRepository.find({});
@@ -20,6 +23,7 @@ export class TaskService {
       name: task.name,
       isDone: task.isDone,
       desc: task.desc,
+      listId: task.listId,
     });
   }
 
@@ -31,10 +35,11 @@ export class TaskService {
 
   async deleteTask(meta: TaskIdDto): Promise<Task> {
     const result = await this.taskRepository.findOneBy({ id: meta.id });
-
     const delte = await this.taskRepository.delete({ id: meta.id });
-    console.log(delte);
-
     return result;
+  }
+
+  async getList(id: number): Promise<List> {
+    return this.ListService.findOne(id);
   }
 }

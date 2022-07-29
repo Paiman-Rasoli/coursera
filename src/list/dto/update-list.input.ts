@@ -13,7 +13,8 @@ export class UpdateListInput {
   @IsNotEmpty()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
+  @IsString()
   @IsOptional()
-  description: string;
+  description?: string;
 }

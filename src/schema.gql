@@ -7,7 +7,7 @@ type List {
   name: String!
   description: String!
   createdAt: String!
-  tasks: Task!
+  tasks: [Task!]
 }
 
 type Task {
@@ -31,13 +31,14 @@ type Mutation {
   deleteTask(id: TaskIdDto!): Task
   createList(createList: CreateListInput!): List!
   updateList(updateList: UpdateListInput!): List!
-  removeList(deleteList: Int!): List!
+  deleteList(id: Int!): List!
 }
 
 input TaskInputDto {
   name: String!
   isDone: Boolean!
   desc: String
+  listId: Int!
 }
 
 input TaskUpdateInputDto {
@@ -59,5 +60,5 @@ input CreateListInput {
 input UpdateListInput {
   id: Float!
   name: String!
-  description: String!
+  description: String
 }

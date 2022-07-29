@@ -21,18 +21,25 @@ export class ListService {
   }
 
   findAll() {
-    return this.listRepository.find();
+    return this.listRepository.find({ relations: ['tasks'] });
   }
 
   findOne(id: number) {
-    return this.listRepository.findOneBy({ id: id });
+    return this.listRepository.findOne({
+      relations: ['tasks'],
+      where: { id: id },
+    });
   }
 
   update(id: number, updateListInput: UpdateListInput) {
-    return `This action updates a #${id} list`;
+    const list: List = this.listRepository.create(updateListInput);
+    list.id = id;
+    return this.listRepository.save(list);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} list`;
+    const find = this.findOne(id);
+    this.listRepository.delete(id);
+    return find;
   }
 }

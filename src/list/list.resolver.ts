@@ -28,8 +28,8 @@ export class ListResolver {
     return this.listService.update(updateListInput.id, updateListInput);
   }
 
-  @Mutation(() => List)
-  removeList(@Args('deleteList', { type: () => Int }) id: number) {
+  @Mutation(() => List, { name: 'deleteList' })
+  removeList(@Args('id', { type: () => Int }) id: number) {
     return this.listService.remove(id);
   }
 }

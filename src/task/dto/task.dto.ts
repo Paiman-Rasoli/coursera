@@ -1,5 +1,11 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import {
+  IsBoolean,
+  IsEmpty,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
 
 @InputType()
 export class TaskInputDto {
@@ -14,6 +20,11 @@ export class TaskInputDto {
   @Field({ nullable: true })
   @IsOptional()
   desc?: string;
+
+  @Field(() => Int)
+  @IsInt()
+  @IsNotEmpty()
+  listId: number;
 }
 
 @InputType()

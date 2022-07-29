@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { TaskResolver } from './task.resolver';
 import { TaskService } from './task.service';
-import { JwtModule } from '@nestjs/jwt';
+import { ListModule } from '../list/list.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Task]), JwtModule.register({})],
+  imports: [TypeOrmModule.forFeature([Task]), ListModule],
   providers: [TaskService, TaskResolver],
 })
 export class TaskModule {}
