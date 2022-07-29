@@ -14,7 +14,6 @@ export class ListResolver {
     @Args('createList') createListInput: CreateListInput,
     @CurrentUser() user,
   ) {
-    console.log('Request', user);
     return this.listService.create(createListInput, user.sub);
   }
 
