@@ -30,11 +30,11 @@ export class List {
 
   @OneToMany(() => Task, (task) => task.list)
   @Field(() => [Task], { nullable: true })
-  tasks: Task[];
+  tasks?: Task[];
 
   @ManyToOne(() => User, (user) => user.lists)
   @Field(() => User)
-  user: User;
+  user?: User;
 
   @Column()
   @Field()
